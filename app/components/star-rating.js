@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     return fullStars.concat(emptyStars);
   }),
 
-  starRange: function(start, end, type) {
+  starRange(start, end, type) {
     var starsData = [];
     for (var i = start; i <= end; i++) {
       starsData.push({
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    setRating: function(newRating) {
+    setRating(newRating) {
       // this.sendAction('onClick', {
       this.get('on-click')({
         item: this.get('item'),

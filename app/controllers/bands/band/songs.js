@@ -4,8 +4,6 @@ export default Ember.Controller.extend({
   songCreationStarted: false,
 
   canCreateSong: Ember.computed('songCreationStarted', 'model.songs.length', function() {
-Ember.Logger.log('songCreationStarted: ', this.get('songCreationStarted'));
-Ember.Logger.log('model.songs.length: ', this.get('model.songs.length'));
     return this.get('songCreationStarted') || this.get('model.songs.length');
   }),
 
@@ -17,7 +15,13 @@ Ember.Logger.log('model.songs.length: ', this.get('model.songs.length'));
     updateRating(params) {
       var song = params.item;
       var rating = params.rating;
+
+      if (song.get('rating') === rating) {
+        rating = 0;
+      }
+
       song.set('rating', rating);
+      return song.save();
     }
   }
 });

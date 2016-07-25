@@ -1,8 +1,12 @@
 import Ember from 'ember';
+import wait from '../utils/wait';
 
 export default Ember.Route.extend({
   model() {
     return this.store.findAll('band');
+    // create network latency to test loading spinners
+    // var bands = this.store.findAll('band');
+    // return wait(bands, 3 * 1000);
   },
 
   actions: {

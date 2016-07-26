@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { capitalize } from '../../../helpers/capitalize';
+import {
+  capitalize
+} from '../../../helpers/capitalize';
 
 export default Ember.Controller.extend({
   queryParams: {
@@ -43,10 +45,10 @@ export default Ember.Controller.extend({
       this.set('songCreationStarted', true);
     },
 
-    updateRating(params) {
-      var song = params.item;
+    updateRating: function(params) {
+      var song   = params.item;
       var rating = params.rating;
-
+      
       if (song.get('rating') === rating) {
         rating = 0;
       }

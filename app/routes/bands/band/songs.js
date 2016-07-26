@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import wait from '../../../utils/wait';
+// import wait from '../../../utils/wait';
 import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 
 export default Ember.Route.extend({

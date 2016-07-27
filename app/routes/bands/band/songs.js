@@ -1,12 +1,9 @@
 import Ember from 'ember';
-// import wait from '../../../utils/wait';
 import { capitalize as capitalizeWords } from '../../../helpers/capitalize';
 
 export default Ember.Route.extend({
   model() {
     return this.modelFor('bands.band');
-    // return wait(this.modelFor('bands.band'), 3000);
-    // return Ember.RSVP.reject(this.modelFor('bands.band'));
   },
 
   resetController(controller) {
@@ -15,15 +12,15 @@ export default Ember.Route.extend({
 
   actions: {
     didTransition() {
-      var band = this.modelFor('bands.band');
-      var name = capitalizeWords(band.get('name'));
+      const band = this.modelFor('bands.band');
+      let name = capitalizeWords(band.get('name'));
       document.title = `${name} songs - Rock & Roll`;
     },
 
     createSong() {
-      var controller = this.get('controller');
-      var band = this.modelFor('bands.band');
-      var song = this.store.createRecord('song', {
+      const controller = this.get('controller');
+      const band = this.modelFor('bands.band');
+      let song = this.store.createRecord('song', {
         title: controller.get('title'),
         band: band
       });

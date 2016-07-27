@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  capitalize
-} from '../../../helpers/capitalize';
+import { capitalize } from '../../../helpers/capitalize';
 
 export default Ember.Controller.extend({
   queryParams: {
@@ -13,7 +11,7 @@ export default Ember.Controller.extend({
   searchTerm: '',
 
   sortProperties: Ember.computed('sortBy', function() {
-    var options = {
+    const options = {
       'ratingDesc': 'rating:desc,title:asc',
       'ratingAsc': 'rating:asc,title:asc',
       'titleDesc': 'title:desc',
@@ -25,18 +23,18 @@ export default Ember.Controller.extend({
   sortedSongs: Ember.computed.sort('matchingSongs', 'sortProperties'),
 
   matchingSongs: Ember.computed('model.songs.@each.title', 'searchTerm', function() {
-    var searchTerm = this.get('searchTerm').toLowerCase();
+    const searchTerm = this.get('searchTerm').toLowerCase();
     return this.get('model.songs').filter(function(song) {
       return song.get('title').toLowerCase().indexOf(searchTerm) !== -1;
     });
   }),
 
-  canCreateSong: Ember.computed('songCreationStarted', 'model.songs.length', function() {
-    return this.get('songCreationStarted') || this.get('model.songs.length');
-  }),
+  isAddButtonDisabled: computed.empty('title'),
+  hasSongs: computed.bool('model.songs.length'),
+  canCreateSong: computed.or('songCreationStarted', 'hasSongs'),
 
   newSongPlaceholder: Ember.computed('model.name', function() {
-    var bandName = this.get('model.name');
+    const bandName = this.get('model.name');
     return `New ${capitalize(bandName)} song`;
   }),
 
@@ -45,10 +43,10 @@ export default Ember.Controller.extend({
       this.set('songCreationStarted', true);
     },
 
-    updateRating: function(params) {
-      var song   = params.item;
-      var rating = params.rating;
-      
+    updateRating(params) {
+      const song   = params.item;
+      let rating = params.rating;
+
       if (song.get('rating') === rating) {
         rating = 0;
       }

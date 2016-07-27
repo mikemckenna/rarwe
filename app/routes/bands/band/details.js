@@ -7,14 +7,15 @@ export default Ember.Route.extend({
 
   actions: {
     save() {
-      var controller = this.get('controller');
-      var band       = controller.get('model');
+      const controller = this.get('controller');
+      const band       = controller.get('model');
       return band.save();
     },
 
     willTransition(transition) {
-      var controller = this.get('controller');
-      var leave = false;
+      const controller = this.get('controller');
+      let leave = false;
+      
       if (controller.get('isEditing')) {
         leave = window.confirm("You have unsaved changes. Are you sure you want to leave ? ");
         if (leave) {
